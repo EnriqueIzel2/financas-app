@@ -16,7 +16,7 @@ import { Background, Input, SubmitButton, SubmitText } from "./styles";
 
 const New = () => {
   const [valor, setValor] = useState("");
-  const [tipo, setTipo] = useState(null);
+  const [tipo, setTipo] = useState("receita");
   const navigation = useNavigation();
   const { user: usuario } = useContext(AuthContext);
 
