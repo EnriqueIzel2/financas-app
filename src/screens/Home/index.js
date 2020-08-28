@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Alert } from "react-native";
 import { AuthContext } from "../../contexts/auth";
-import { format, isPast } from "date-fns";
+import { format, isBefore } from "date-fns";
 import firebase from "../../services/firebaseConnection";
 
 import Header from "../../components/Header";
@@ -30,7 +30,7 @@ const Home = () => {
         .ref("historico")
         .child(uid)
         .orderByChild("date")
-        .equalTo(format(new Date(), "dd/MM/yy"))
+        .equalTo(format(new Date(), "dd/MM/yyyy"))
         .limitToLast(10)
         .on("value", (snapshot) => {
           setHistorico([]);
@@ -52,7 +52,14 @@ const Home = () => {
   }, []);
 
   function handleDelete(data) {
-    if (isPast(new Date(data.date))) {
+    const [diaItem, mesItem, anoItem] = data.date.split("/");
+    const dateItem = new Date(`${anoItem}/${mesItem}/${diaItem}`);
+
+    const formatDataHoje = format(new Date(), "dd/MM/yyyy");
+    const [diaHoje, mesHoje, anoHoje] = formatDataHoje.split("/");
+    const dateHoje = new Date(`${anoHoje}/${mesHoje}/${diaHoje}`);
+
+    if (isBefore(dateItem, dateHoje)) {
       alert("Você não pode excluir um registro antigo");
       return;
     }
