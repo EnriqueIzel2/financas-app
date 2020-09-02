@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { View, Text, Image } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -7,41 +6,20 @@ import {
 } from "@react-navigation/drawer";
 import { AuthContext } from "../../contexts/auth";
 
-// import { Container } from './styles';
+import { Container, Logo, WelcomeText, NameText } from "./styles";
 
 const CustomDrawer = (props) => {
   const { user, signOut } = useContext(AuthContext);
 
   return (
     <DrawerContentScrollView {...props}>
-      <View
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: 25,
-        }}
-      >
-        <Image
-          source={require("../../assets/Logo.png")}
-          style={{ width: 85, height: 85 }}
-          resizeMode="contain"
-        />
+      <Container>
+        <Logo source={require("../../assets/Logo.png")} resizeMode="contain" />
 
-        <Text style={{ color: "#fff", fontSize: 18, marginTop: 5 }}>
-          Bem-vindo
-        </Text>
+        <WelcomeText>Bem-vindo</WelcomeText>
 
-        <Text
-          style={{
-            color: "#fff",
-            fontSize: 17,
-            fontWeight: "bold",
-            paddingBottom: 25,
-          }}
-        >
-          {user && user.name}
-        </Text>
-      </View>
+        <NameText>{user && user.name}</NameText>
+      </Container>
 
       <DrawerItemList {...props} />
 
