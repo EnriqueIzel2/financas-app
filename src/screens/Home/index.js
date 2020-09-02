@@ -1,23 +1,35 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Alert } from "react-native";
+import { Alert, TouchableOpacity, Platform } from "react-native";
 import { AuthContext } from "../../contexts/auth";
-import { format, isBefore } from "date-fns";
+import { format } from "date-fns";
 import firebase from "../../services/firebaseConnection";
 
+import Icon from "@expo/vector-icons/MaterialIcons";
 import Header from "../../components/Header";
 import HistoricoList from "../../components/HistoricoList";
-import { Background, Container, Name, Saldo, Title, List } from "./styles";
+import DatePicker from "../../components/DatePicker";
+import {
+  Background,
+  Container,
+  Name,
+  Saldo,
+  Title,
+  Area,
+  List,
+} from "./styles";
 
 const Home = () => {
   const [historico, setHistorico] = useState([]);
   const [saldo, setSaldo] = useState(0);
+  const [newDate, setNewDate] = useState(new Date());
+  const [showPicker, setShowPicker] = useState(false);
 
   const { user } = useContext(AuthContext);
   const uid = user && user.uid;
 
   useEffect(() => {
     async function loadList() {
-      firebase
+      await firebase
         .database()
         .ref("users")
         .child(uid)
@@ -30,7 +42,7 @@ const Home = () => {
         .ref("historico")
         .child(uid)
         .orderByChild("date")
-        .equalTo(format(new Date(), "dd/MM/yyyy"))
+        .equalTo(format(newDate, "dd/MM/yyyy"))
         .limitToLast(10)
         .on("value", (snapshot) => {
           setHistorico([]);
@@ -43,27 +55,15 @@ const Home = () => {
               date: childItem.val().date,
             };
 
-            setHistorico((oldArray) => [...oldArray, list]);
+            setHistorico((oldArray) => [...oldArray, list].reverse());
           });
         });
     }
 
     loadList();
-  }, []);
+  }, [newDate]);
 
   function handleDelete(data) {
-    const [diaItem, mesItem, anoItem] = data.date.split("/");
-    const dateItem = new Date(`${anoItem}/${mesItem}/${diaItem}`);
-
-    const formatDataHoje = format(new Date(), "dd/MM/yyyy");
-    const [diaHoje, mesHoje, anoHoje] = formatDataHoje.split("/");
-    const dateHoje = new Date(`${anoHoje}/${mesHoje}/${diaHoje}`);
-
-    if (isBefore(dateItem, dateHoje)) {
-      alert("Você não pode excluir um registro antigo");
-      return;
-    }
-
     Alert.alert(
       "Cuidado, Atenção",
       `Você deseja excluir ${data.tipo} - Valor: ${data.valor}`,
@@ -78,33 +78,46 @@ const Home = () => {
         },
       ]
     );
-
-    async function handleDeleteSuccess() {
-      await firebase
-        .database()
-        .ref("historico")
-        .child(uid)
-        .child(data.key)
-        .remove()
-        .then(async () => {
-          let saldoAtual = saldo;
-
-          data.tipo === "despesa"
-            ? (saldoAtual += parseFloat(data.valor))
-            : (saldoAtual -= parseFloat(data.valor));
-
-          await firebase
-            .database()
-            .ref("users")
-            .child(uid)
-            .child("saldo")
-            .set(saldoAtual);
-        })
-        .catch((error) => {
-          console.log("Erro ao excluir: ", error);
-        });
-    }
   }
+
+  async function handleDeleteSuccess(data) {
+    await firebase
+      .database()
+      .ref("historico")
+      .child(uid)
+      .child(data.key)
+      .remove()
+      .then(async () => {
+        let saldoAtual = saldo;
+
+        data.tipo === "despesa"
+          ? (saldoAtual += parseFloat(data.valor))
+          : (saldoAtual -= parseFloat(data.valor));
+
+        await firebase
+          .database()
+          .ref("users")
+          .child(uid)
+          .child("saldo")
+          .set(saldoAtual);
+      })
+      .catch((error) => {
+        console.log("Erro ao excluir: ", error);
+      });
+  }
+
+  function handleShowPicker() {
+    setShowPicker(true);
+  }
+
+  function handleClose() {
+    setShowPicker(false);
+  }
+
+  const onChange = (date) => {
+    setShowPicker(Platform.OS === "ios");
+    setNewDate(date);
+  };
 
   return (
     <Background>
@@ -116,7 +129,12 @@ const Home = () => {
         </Saldo>
       </Container>
 
-      <Title>Últimas Movimentações Hoje</Title>
+      <Area>
+        <TouchableOpacity onPress={handleShowPicker}>
+          <Icon name="event" color="#fff" size={30} />
+        </TouchableOpacity>
+        <Title>Últimas Movimentações Hoje</Title>
+      </Area>
 
       <List
         showsVerticalScrollIndicator={false}
@@ -126,6 +144,10 @@ const Home = () => {
           <HistoricoList data={item} deleteItem={handleDelete} />
         )}
       />
+
+      {showPicker && (
+        <DatePicker onClose={handleClose} date={newDate} onChange={onChange} />
+      )}
     </Background>
   );
 };
