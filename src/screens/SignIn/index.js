@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Platform, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -17,6 +17,7 @@ import {
 } from "./styles";
 
 const SignIn = () => {
+  const input2 = useRef();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signIn, loadingAuth } = useContext(AuthContext);
@@ -37,7 +38,11 @@ const SignIn = () => {
             autoCorrect={false}
             autoCapitalize="none"
             value={email}
+            returnKeyType="next"
+            keyboardType="email-address"
             onChangeText={(text) => setEmail(text)}
+            blurOnSubmit={false}
+            onSubmitEditing={() => input2.current.focus()}
           />
         </InputContainer>
 
@@ -49,6 +54,7 @@ const SignIn = () => {
             value={password}
             secureTextEntry={true}
             onChangeText={(text) => setPassword(text)}
+            ref={input2}
           />
         </InputContainer>
 
