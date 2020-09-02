@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../../contexts/auth";
 
 import Header from "../../components/Header";
-import Picker from "../../components/Picker/index.android";
+import Picker from "../../components/Picker";
 import { Background, Input, SubmitButton, SubmitText } from "./styles";
 
 const New = () => {
