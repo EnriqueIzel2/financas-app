@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Platform, ActivityIndicator } from "react-native";
 
 import { AuthContext } from "../../contexts/auth";
@@ -13,6 +13,8 @@ import {
 } from "../SignIn/styles";
 
 const SignUp = () => {
+  const input2 = useRef();
+  const input3 = useRef();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +34,10 @@ const SignUp = () => {
             autoCorrect={false}
             autoCapitalize="none"
             value={name}
+            returnKeyType="next"
             onChangeText={(text) => setName(text)}
+            blurOnSubmit={false}
+            onSubmitEditing={() => input2.current.focus()}
           />
         </InputContainer>
 
@@ -42,7 +47,11 @@ const SignUp = () => {
             autoCorrect={false}
             autoCapitalize="none"
             value={email}
+            returnKeyType="next"
             onChangeText={(text) => setEmail(text)}
+            ref={input2}
+            blurOnSubmit={false}
+            onSubmitEditing={() => input3.current.focus()}
           />
         </InputContainer>
 
@@ -54,6 +63,7 @@ const SignUp = () => {
             value={password}
             secureTextEntry={true}
             onChangeText={(text) => setPassword(text)}
+            ref={input3}
           />
         </InputContainer>
 
