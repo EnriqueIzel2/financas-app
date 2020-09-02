@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
     }
 
     loadStorage();
-  });
+  }, []);
 
   async function signIn(email, password) {
     setLoadingAuth(true);
