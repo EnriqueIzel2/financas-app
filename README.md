@@ -1,3 +1,4 @@
 # Finanças App
 
-Aplicativo feito com auxílio do Curso *Fábrica de Aplicativos*
+## Descrição
+Aplicativo para registrar receitas e despesas, organizadas por data.
