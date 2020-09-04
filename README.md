@@ -11,13 +11,16 @@ Projeto desenvolvido durante um módulo do curso [**Fábrica de Aplicativos**](h
 
 ## Tabela de conteúdos
 <!--ts-->
-   * [Sobre](#Sobre)
-   * [Tabela de Conteudo](#tabela-de-conteudo)
+   * [Sobre](#sobre)
+   * [Tabela de Conteudo](#tabela-de-conteúdos)
    * [Como usar](#como-usar)
       * [Pré-requisitos](#pré-requisitos)
-      * [Configurando o Backend](#:wrench:-configurando-o-backend)
-      * [Rodando o aplicativo](#:iphone:-Rodando-o-aplicativo)
-   * [Tecnologias](#tecnologias)
+      * [Configurando o Backend](#wrench-configurando-o-backend)
+      * [Rodando o aplicativo](#iphone-rodando-o-aplicativo)
+   * [Tecnologias](#computer-tecnologias)
+   * [Como Contribuir](#muscle-como-contribuir-para-o-projeto)
+   * [Autor](#boy-autor)
+   * [Licença](#-licença)
 <!--te-->
 
 ---
