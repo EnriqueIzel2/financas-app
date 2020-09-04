@@ -46,7 +46,7 @@ $ cd financas-app
 :exclamation: O backend do projeto utiliza os serviços do Firebase. Por isso é necessário que você tenha uma conta e crie um projeto na plataforma.
 
 1. No seu projeto crie os serviços de **Authentication** e **Realtime Database**
-2. Adicione um novo app na opção **Adicionar app* e escolha a opção **Web**
+2. Adicione um novo app na opção **Adicionar app** e escolha a opção **Web**
 3. Copie a variável **firebaseConfig**
 4. Depois edite o arquivo [firebaseConnection.js](https://github.com/EnriqueIzel2/financas-app/blob/master/src/services/firebaseConnection.js) colocando as configurações fornecidas pelo firebase.
 
@@ -75,7 +75,7 @@ Você será direcionado para a página http://localhost:19002/.
 As seguintes ferramentas foram usadas na construção do projeto:
 
 ### **Backend**
-   - [Firebase](https://firebase.google.com/)
+   - **[Firebase](https://firebase.google.com/)**
   
 > Veja o arquivo  [package.json](https://github.com/EnriqueIzel2/financas-app/blob/master/package.json)
 
