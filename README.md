@@ -1,11 +1,5 @@
 # Finanças App :moneybag:
 
-## Sobre
-Aplicativo para registrar receitas e despesas de maneira simples, como um caderno de anotações.
-
-Projeto desenvolvido durante um módulo do curso [**Fábrica de Aplicativos**](https://sujeitoprogramador.com/fabricadeaplicativos/?ref=J36424210D).
-
----
 
 🚧  Finanças App :moneybag: Em construção...  🚧
 
@@ -13,6 +7,7 @@ Projeto desenvolvido durante um módulo do curso [**Fábrica de Aplicativos**](h
 <!--ts-->
    * [Sobre](#sobre)
    * [Tabela de Conteudo](#tabela-de-conteúdos)
+   * [Layout](#layout)
    * [Como usar](#como-usar)
       * [Pré-requisitos](#pré-requisitos)
       * [Configurando o Backend](#wrench-configurando-o-backend)
@@ -24,6 +19,28 @@ Projeto desenvolvido durante um módulo do curso [**Fábrica de Aplicativos**](h
 <!--te-->
 
 ---
+
+## Sobre
+Aplicativo para registrar receitas e despesas de maneira simples, como um caderno de anotações.
+
+Projeto desenvolvido durante um módulo do curso [**Fábrica de Aplicativos**](https://sujeitoprogramador.com/fabricadeaplicativos/?ref=J36424210D).
+
+---
+
+## Layout
+<p align="center">
+  <img alt="TelaLogin" title="#TelaLogin" src="./assets/readmeImages/financas_tela_login.jpg" width="200px">
+
+  <img alt="TelaMovimentação" title="#Movimentação" src="./assets/readmeImages/financas_movimentacao.jpg" width="200px">
+</p>
+
+<p align="center">
+  <img alt="TelaCadastro" title="#TelaCadastro" src="./assets/readmeImages/financas_tela_cadastro.jpg" width="200px">
+
+  <img alt="MenuLateral" title="#MenuLateral" src="./assets/readmeImages/financas_menu_lateral.jpg" width="200px">
+</p>
+
+___
 
 ## Como usar
 Esse projeto está dividido em duas partes:
