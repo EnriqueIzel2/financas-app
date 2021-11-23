@@ -1,7 +1,7 @@
 # Finanças App :moneybag:
 
 
-🚧  Finanças App :moneybag: Em construção...  🚧
+🚧  Finanças App :moneybag: Finalizado  🚧
 
 ## Tabela de conteúdos
 <!--ts-->
